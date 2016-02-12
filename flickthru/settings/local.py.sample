@@ -1,0 +1,16 @@
+from os.path import join, normpath, abspath, dirname
+
+DEBUG = True
+
+DJANGO_ROOT = dirname(dirname(abspath(__file__)))
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': normpath(join(DJANGO_ROOT, 'default.db')),
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
+    }
+}

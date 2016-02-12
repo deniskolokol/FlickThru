@@ -1,0 +1,67 @@
+html, body, #wrapper, #content, .container, .row{ 
+  height: 100%;
+}
+body {
+  background: #eee;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color:#000;
+  margin: 0;
+  padding: 0;
+}
+.swiper-container {
+  height: 80%;
+  display: block;
+}
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #EEEEEE;
+  background-size: 100% !important; 
+  background-repeat: no-repeat !important;
+  height: 100%;
+}
+.swiper-slide-title {
+  display: table;
+  width: 100%;
+  height: 15%;
+}
+
+.slide-title {
+  display: table-cell;
+  vertical-align: middle;
+  word-wrap: break-word;
+  word-break: break-all;
+  font-size: 125%;
+}
+
+.swiper-slide-content {
+  width: 100%;
+  height: 100%;
+  background-size: 100% !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+}
+
+.estimations {
+  display: block;
+  height: 5%;
+  font-size: 150%;
+}
+
+.likes{
+  float: right;
+}
+
+.score{
+  float: left;
+}
+
+#like {
+  background-position: center !important;
+  background-size: 256px 256px !important;
+}
+#dislike {
+  background-position: center !important;
+  background-size: 256px 256px !important;
+}

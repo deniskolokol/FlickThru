@@ -1,0 +1,18 @@
+Run commands bellow in directory where requrements.txt is placed to make this project work
+    virtualenv .env
+    source .env/bin/activate
+    pip install -r requrements.txt
+
+create  postgresql user 'django' with password '5bTTv0FytW' and create database with name 'django', add this user access to it.
+(this link https://www.digitalocean.com/community/tutorials/how-to-install-and-use-postgresql-on-ubuntu-14-04 may help)
+
+python manage.py migrate
+python manage.py createsuperuser - for creating user that will have access to admin menu
+
+Then add images through admin menu
+
+For making possible to loging through fb add in admin/socialaccount/socialapp/
+App with name 'Facebook' with Provider 'Facebook' with Client id '853081708138025' and Secret key '853081708138025' and choose in availible sites site with name 'example.com'
+
+For making possible to loging through google add in admin/socialaccount/socialapp/
+App with name 'Google' with Provider 'Google' with Client id '309495364427-815gt6h5ip97rhpp083dajr60cd9h9h8.apps.googleusercontent.com' and Secret key 'gbb4RRfK1dsXExr2rEwSg9gI' and choose in availible sites site with name 'example.com'

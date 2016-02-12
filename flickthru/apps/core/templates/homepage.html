@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Flickthru{% endblock title %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/swiper.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/get_random_image.css' %}">
+  <style>
+  #like {
+    background: url('{% static "img/like.png" %}');
+  }
+  #dislike {
+    background: url('{% static "img/dislike.png" %}');
+  }
+  </style>
+{% endblock extra_css %}
+
+{% block extra_js %}
+  <script src="{% static 'js/swiper.jquery.min.js' %}"></script>
+  <script src="{% static 'js/get_random_image.js' %}"></script>
+{% endblock extra_js %}
+
+
+{% block content %}
+  {% if no_images_yet %}
+<div class="row">
+  <br><br><br><br><br><br>
+  <h1 align="center">There is no images yet...</h1>
+</div>
+  {% else %}
+
+<div class="row">
+  <div align="center" class="swiper-slide-title">
+    <div class="slide-title"></div>
+  </div>
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"></div>
+      <div class="swiper-slide"></div>
+      <div class="swiper-slide"></div>
+    </div>
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+  <div align="center" class="estimations raw">
+    <div class="score col-xs-6"></div>
+    <div class="likes col-xs-6"></div>
+  </div>
+</div>
+  {% endif %}
+
+{% endblock content %}

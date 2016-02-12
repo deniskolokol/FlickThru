@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load socialaccount %}
+
+{% block page_title %}Login{% endblock page_title %}
+
+{% block content %}
+
+<h1 align="center">Login</h1>
+<br/>
+<div>
+  <p align="center">Please login to get acces to the site</p>
+</div>
+<br/>
+
+
+<div class="raw">
+<!--
+<span class="col-xs-3 col-md-4"></span>
+<a href="{% provider_login_url "google"  %}" class="btn btn-primary col-xs-6 col-md-4">Sign in with Google</a><br><br>
+-->
+<span class="col-xs-3 col-md-4"></span>
+<a href="{% provider_login_url "facebook" method="oauth2" %}" class="btn btn-primary col-xs-6 col-md-4">Sign in with Facebook</a>
+</div>
+
+
+{% endblock content %}
