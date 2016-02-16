@@ -14,6 +14,7 @@ from django.shortcuts import get_object_or_404
 from core.forms import LoginForm
 from core.models import TitledImage, Like
 from core.decorators import cbv_decorator, forbidden_user
+from core.handlers import EventHandler
 
 
 def get_random_picture():
@@ -93,6 +94,16 @@ def like_picture(request, id):
         result = 'Dislike was added'
     image.save()
     like.save()
+    handler = EventHandler()
+    handler.create_event(
+        event='like' if like.liked else 'dislike',
+        entity_type='user',
+        entity_id=user.id,
+        properties={},
+        target_entity_id=image.id,
+        target_entity_type='item',
+        async=True
+        )
     return JsonResponse({'status': 'success', 'result': result})
 
 
