@@ -129,6 +129,7 @@ def scores(request):
     user = request.get('user')
     resp = requests.post(settings.PIO_EVENT_RESPONDER, json={"user": user.id})
     data = resp.json()
+    data.update({'user': user.id})
     print set(rec['score'] for rec in data['itemScores'])
     for rec in data['itemScores']:
         image = TitledImage.objects.get(id=int(rec['item']))
