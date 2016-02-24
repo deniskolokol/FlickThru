@@ -1,7 +1,8 @@
 import datetime
-from random import randint
+import random
+import requests
 
-from django.db.models import Max, Min
+from django.db.models import Max, Min, Count
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.views.generic.base import TemplateView
@@ -10,6 +11,7 @@ from django.views.decorators.http import require_http_methods
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404
+from django.conf import settings
 
 from core.forms import LoginForm
 from core.models import TitledImage, Like
@@ -22,12 +24,11 @@ def get_random_picture():
     Return random image, get by random id, if there trying to get
     image with id that was deleted, try again
     '''
-    max_id = TitledImage.objects.aggregate(Max('id'))['id__max']
-    min_id = TitledImage.objects.aggregate(Min('id'))['id__min']
-    if not max_id:
-        return None
+    # WARNING! filtering by ASOS is temporary! remove after testing!
+    qset = TitledImage.objects.filter(subscription_object='ASOS')
     try:
-        image = TitledImage.objects.get(id=randint(min_id, max_id))
+        random_idx = random.randint(0, qset.count()-1)
+        image = qset[random_idx]
     except TitledImage.DoesNotExist:
         return get_random_picture()
     return image
@@ -122,3 +123,14 @@ def login(request):
     return render(request, "login.html", {
         "login_form": login_form,
     })
+
+
+def scores(request):
+    user = request.get('user')
+    resp = requests.post(settings.PIO_EVENT_RESPONDER, json={"user": user.id})
+    data = resp.json()
+    print set(rec['score'] for rec in data['itemScores'])
+    for rec in data['itemScores']:
+        image = TitledImage.objects.get(id=int(rec['item']))
+        print "%s: %.5f" % (image, rec['score'])
+    return data
